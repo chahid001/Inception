@@ -1,0 +1,127 @@
+version: '3.3'
+
+services:
+
+  nginx:
+      build: requirements/nginx
+      container_name: nginx 
+      image: nginx
+      ports:
+        - "80:80"
+        - "443:443"      
+      volumes:
+        - wp:/var/www/html/wordpress
+      networks:
+        - net1
+      restart: on-failure
+      depends_on:
+        - wordpress
+
+  mariadb:
+      build: requirements/mariadb
+      container_name: mariadb
+      image: mariadb
+      ports:
+        - "3306:3306"      
+      volumes:
+        - db:/var/lib/mysql
+      networks:
+        - net1
+      restart: on-failure
+
+  wordpress:
+      build: requirements/wordpress
+      container_name: wordpress
+      image: wordpress
+      env_file: .env
+      ports:
+        - "9000:9000"
+      volumes:
+        - wp:/var/www/html/wordpress
+      networks:
+        - net1
+      restart: on-failure
+      depends_on:
+        - mariadb
+        - redis
+
+  redis:
+      build: requirements/bonus/redis
+      container_name: redis
+      image: redis
+      ports:
+        - 6379:6379
+      networks:
+        - net1
+      restart: on-failure
+  
+  ftp:
+      build: requirements/bonus/ftp
+      container_name: ftp
+      image: ftp
+      env_file: .env
+      ports:
+        - "21:21"
+        - "20-20"
+        - "40000-40005:40000-40005"
+      volumes:
+        - wp:/home/schahid
+      networks:
+        - net1
+      restart: on-failure
+
+  static-website:
+      build: requirements/bonus/static-website
+      container_name: static-website
+      image: static-website
+      volumes:
+        - wp:/var/www/html/wordpress
+      networks:
+        - net1
+      restart: on-failure
+      depends_on:
+        - wordpress
+
+  adminer:
+      build: requirements/bonus/adminer
+      container_name: adminer
+      image: adminer
+      ports:
+        - "8080:8080"
+      volumes:
+        - wp:/var/www/html/wordpress
+      networks:
+        - net1
+      restart: on-failure
+
+  cadvisor:
+      build: requirements/bonus/cadvisor
+      container_name: cadvisor
+      image: cadvisor
+      ports:
+        - 6500:6500
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:ro
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
+        - /dev/disk/:/dev/disk:ro
+      networks:
+        - net1
+      restart: on-failure
+
+volumes:
+  wp:
+    driver_opts :
+      type : 'none'
+      o : bind
+      device : /home/schahid/data/wp
+  db:
+    driver_opts :
+      type : 'none'
+      o : bind
+      device : /home/schahid/data/db
+
+networks:
+  net1:
+    driver: bridge

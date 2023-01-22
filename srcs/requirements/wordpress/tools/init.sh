@@ -13,7 +13,6 @@ cd /var/www/html/wordpress
 wp core download --allow-root
 
 mv /var/www/wp-config.php /var/www/html/wordpress
-
 wp core install --allow-root --url=${URL} --title=${WORDPRESS_NAME} --admin_user=${WORDPRESS_ROOT_LOGIN} --admin_password=${MYSQL_ROOT_PASSWORD} --admin_email=${WORDPRESS_ROOT_EMAIL}
 wp user create ${MYSQL_USER} ${WORDPRESS_USER_EMAIL} --user_pass=${MYSQL_PASSWORD} --role=author --allow-root
 

@@ -1,9 +1,7 @@
 
 # Inception
 
-This project aims to broaden your knowledge of system administration by using Docker.
-You will virtualize several Docker images, creating them in your new personal virtual
-machine.
+The "Inception" project delves into system administration with Docker, focusing on setting up a comprehensive infrastructure within a virtual machine. It mandates the creation of distinct Docker containers running various services like NGINX, WordPress with php-fpm, and MariaDB, among others. Emphasizing best practices, it prohibits certain approaches, mandates use of environment variables, and enforces security measures like domain configuration and avoiding credential exposure. Additionally, it includes a bonus section allowing students to implement extra services like Redis cache, FTP server, or additional utilities for bonus credit, contingent upon successful completion of the mandatory tasks.
 
 
 ## Tech used in the project
@@ -17,34 +15,51 @@ machine.
 ![Rancher](https://img.shields.io/badge/redis-CC0000.svg?&style=for-the-badge&logo=redis&logoColor=white)
 
 
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`URL`
+
+`MYSQL_USER`
+`MYSQL_PASSWORD`
+`MYSQL_ROOT_PASSWORD`
+
+`WORDPRESS_ROOT_LOGIN`
+`WORDPRESS_ROOT_EMAIL`
+`WORDPRESS_NAME`
+`WORDPRESS_USER_EMAIL`
+
+`FTP_USER`
+`FTP_PASSWORD`
+
+
 ## Deployment
 
+To deploy this project run
 
+```bash
+make
+```
 
 ## About the project
 
 This project consists in having you set up a small infrastructure composed of different
 services under specific rules with docker compose.
 
-The Docker images of the project are built with Dockerfile.
+The Docker images of the project are built with Dockerfile
 
-- A Docker container that contains NGINX with TLSv1.3.
-- A Docker container that contains WordPress + php-fpm.
-- A Docker container that contains MariaDB.
-- A volume that contains the WordPress database.
-- A second volume that contains the WordPress website files.
-- A docker-network that establishes the connection between the containers.
+- A Docker container that contains NGINX with TLSv1.3
+- A Docker container that contains WordPress + php-fpm
+- A Docker container that contains MariaDB
+- A volume that contains the WordPress database
+- A second volume that contains the WordPress website files
+- A docker-network that establishes the connection between the containers
 
 ## Bonus part
-- Redis cache for the WordPress website in order to properly manage the cache.
-- FTP server container pointing to the volume of the WordPress website.
+- Redis cache for the WordPress website in order to properly manage the cache
+- FTP server container pointing to the volume of the WordPress website
 - A simple static website.
-- Adminer.
+- Adminer
 - Cadvisor
-    
-
-
-    
-
-
-

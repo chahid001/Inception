@@ -115,12 +115,12 @@ volumes:
     driver_opts :
       type : 'none'
       o : bind
-      device : /home/schahid/data/wp
+      device : /home/$USER/data/wp
   db:
     driver_opts :
       type : 'none'
       o : bind
-      device : /home/schahid/data/db
+      device : /home/$USER/data/db
 
 networks:
   net1:

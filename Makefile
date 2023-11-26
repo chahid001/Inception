@@ -1,11 +1,11 @@
 all: mkdr up
 
 mkdr:
-	sudo mkdir -p /home/schahid/data/wp
-	sudo mkdir -p /home/schahid/data/db
+	sudo mkdir -p /home/$USER/data/wp
+	sudo mkdir -p /home/$USER/data/db
 
 rm:
-	sudo rm -rf /home/schahid/data
+	sudo rm -rf /home/$USER/data
 
 up:
 	sudo docker compose -f srcs/docker-compose.yaml build

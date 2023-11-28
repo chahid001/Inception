@@ -57,6 +57,8 @@ The Docker images of the project are built with Dockerfile
 - A second volume that contains the WordPress website files
 - A docker-network that establishes the connection between the containers
 
+![](https://github.com/chahid001/Inception/blob/main/assets/inception.png)
+
 ## Bonus part
 - Redis cache for the WordPress website in order to properly manage the cache
 - FTP server container pointing to the volume of the WordPress website

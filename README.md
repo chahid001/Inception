@@ -43,6 +43,12 @@ To deploy this project run
 make
 ```
 
+Also you need to modify your 'hosts' file, so you can use the domain name instead of the IP addr
+
+```bash
+sudo nano /etc/hosts
+```
+
 ## About the project
 
 This project consists in having you set up a small infrastructure composed of different
